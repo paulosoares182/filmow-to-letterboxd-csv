@@ -18,7 +18,7 @@ var links = await context.ExtractMoviesAndRating(user);
 var movies = await context.ExtractMovieDeatils(links);
 
 StringBuilder sb = new();
-sb.AppendLine("Title,Director,Year,Rating");
+sb.AppendLine("Title,Directors,Year,Rating");
 
 foreach (var movie in movies)
     sb.AppendLine($"{movie.Title},{movie.Director},{movie.Year},{movie.Rating}");
