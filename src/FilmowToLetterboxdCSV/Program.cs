@@ -15,7 +15,8 @@ using var context = BrowsingContext.New(config);
 Stopwatch stopwatch = Stopwatch.StartNew();
 
 var links = await context.ExtractMoviesAndRating(user);
-var movies = await context.ExtractMovieDeatils(links);
+var movieTasks = links.Select(link => context.ExtractMovieDetailsAsync(link.links, link.rating));
+var movies = await Task.WhenAll(movieTasks);
 
 StringBuilder sb = new();
 sb.AppendLine("Title,Directors,Year,Rating");
